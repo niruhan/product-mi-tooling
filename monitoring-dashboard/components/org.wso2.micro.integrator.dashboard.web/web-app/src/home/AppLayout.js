@@ -18,88 +18,74 @@
  *
  */
 
-import React, {useEffect, useState, useRef} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import {Switch, Route} from 'react-router-dom';
-import styled from 'styled-components';
-
-import Header from 'components/App/Header';
-import NotFound from 'components/NotFound';
-import SideBar from './SideBar';
-import UserSuggestions from './UserSuggestions';
-import ForumUsers from 'pages/LangForum/ForumUsers.js';
-
-import {useWindowSize} from 'hooks/useWindowSize';
-import {useClickOutside} from 'hooks/useClickOutside';
-
-import theme from 'theme';
-
-import {useStore} from 'store';
-import {SET_AUTH_USER} from 'store/auth';
+// import styled from 'styled-components';
 import Dashboard from './Dashboard';
 import SiDashboard from '../si/SiDashboard';
 
-const Root = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin: 0 auto;
-  width: 100%;
-  position: relative;
+// const Root = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   margin: 0 auto;
+//   width: 100%;
+//   position: relative;
 
-  @media (min-width: ${p => p.theme.screen.md}) {
-    width: ${p => p.theme.screen.md};
-  }
+//   @media (min-width: ${p => p.theme.screen.md}) {
+//     width: ${p => p.theme.screen.md};
+//   }
 
-  @media (min-width: ${p => parseInt(p.theme.screen.lg, 10) + 20 + 'px'}) {
-    width: ${p => p.theme.screen.lg};
-  }
-`;
+//   @media (min-width: ${p => parseInt(p.theme.screen.lg, 10) + 20 + 'px'}) {
+//     width: ${p => p.theme.screen.lg};
+//   }
+// `;
 
 /**
- * Main layout of the app, when user is authenticated
+ * Main layout of the app
  */
-const AppLayout = ({location, authUser, refetch}) => {
-    const [{auth}, dispatch] = useStore();
+const AppLayout = () => {
+    // const [{auth}, dispatch] = useStore();
 
-    const windowSize = useWindowSize();
-    const isDesktop = windowSize.width >= parseInt(theme.screen.md, 10);
-    const [isSideBarOpen, setIsSidebarOpen] = useState(isDesktop);
+    // const windowSize = useWindowSize();
+    // const isDesktop = windowSize.width >= parseInt(theme.screen.md, 10);
+    // const [isSideBarOpen, setIsSidebarOpen] = useState(isDesktop);
 
-    const sideBarRef = useRef('');
+    // const sideBarRef = useRef('');
 
-    useEffect(() => {
-        dispatch({type: SET_AUTH_USER, payload: authUser});
-    }, [dispatch, authUser]);
+    // useEffect(() => {
+    //     dispatch({type: SET_AUTH_USER, payload: authUser});
+    // }, [dispatch, authUser]);
 
-    useClickOutside(sideBarRef, () => {
-        if (!isDesktop && isSideBarOpen) {
-            setIsSidebarOpen(false);
-        }
-    });
+    // useClickOutside(sideBarRef, () => {
+    //     if (!isDesktop && isSideBarOpen) {
+    //         setIsSidebarOpen(false);
+    //     }
+    // });
 
-    useEffect(() => {
-        setIsSidebarOpen(isDesktop);
-    }, [isDesktop]);
+    // useEffect(() => {
+    //     setIsSidebarOpen(isDesktop);
+    // }, [isDesktop]);
 
-    useEffect(() => {
-        return () => {
-            if (!isDesktop) {
-                setIsSidebarOpen(false);
-            }
-        };
-    }, [location.pathname, isDesktop]);
+    // useEffect(() => {
+    //     return () => {
+    //         if (!isDesktop) {
+    //             setIsSidebarOpen(false);
+    //         }
+    //     };
+    // }, [location.pathname, isDesktop]);
 
-    if (!auth.user) return null;
+    // if (!auth.user) return null;
 
     return (
         <>
-            <Root>
+            <div>
                 <Switch>
                     <Route exact path={'/mi'} component={Dashboard}/>
                     <Route exact path={'/si'} component={SiDashboard}/>
                 </Switch>
-            </Root>
+            </div>
         </>
     );
 };
