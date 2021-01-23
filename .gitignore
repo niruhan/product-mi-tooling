@@ -130,3 +130,4 @@ dist/
 ## Auto completion scripts for the CLI
 cmd/shell-completions/
 
+monitoring-dashboard/components/org.wso2.micro.integrator.dashboard.web/web-app/package-lock.json
