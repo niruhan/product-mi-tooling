@@ -1,3 +1,23 @@
+/*
+ * Copyright (c) 2021, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ *
+ *
+ */
+
 import React, {useEffect, useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
@@ -10,9 +30,6 @@ import SideBar from './SideBar';
 import UserSuggestions from './UserSuggestions';
 import ForumUsers from 'pages/LangForum/ForumUsers.js';
 
-import Home from 'pages/Home';
-import EditInfo from 'pages/EditInfo';
-
 import {useWindowSize} from 'hooks/useWindowSize';
 import {useClickOutside} from 'hooks/useClickOutside';
 
@@ -20,6 +37,8 @@ import theme from 'theme';
 
 import {useStore} from 'store';
 import {SET_AUTH_USER} from 'store/auth';
+import Dashboard from './Dashboard';
+import SiDashboard from '../si/SiDashboard';
 
 const Root = styled.div`
   display: flex;
@@ -75,17 +94,11 @@ const AppLayout = ({location, authUser, refetch}) => {
 
     return (
         <>
-            <Header toggleSideBar={() => setIsSidebarOpen(!isSideBarOpen)}/>
             <Root>
-                <SideBar isOpen={isSideBarOpen} sideBarRef={sideBarRef}/>
                 <Switch>
-                    
-                    <Route exact path={'/mi'} component={EditInfo}/>
-                    <Route exact path={'/si'} component={Home}/>
-                    <Route component={NotFound}/>
+                    <Route exact path={'/mi'} component={Dashboard}/>
+                    <Route exact path={'/si'} component={SiDashboard}/>
                 </Switch>
-                <UserSuggestions pathname={location.pathname}/>
-                <ForumUsers pathname={location.pathname}/>
             </Root>
         </>
     );
