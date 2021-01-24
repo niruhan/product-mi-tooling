@@ -19,7 +19,6 @@
  */
 
 import React from 'react';
-import {withRouter} from 'react-router-dom';
 import {
     BrowserRouter as Router,
     Switch,
@@ -33,9 +32,9 @@ import SiDashboard from '../si/SiDashboard';
  * Main layout of the app
  */
 const AppLayout = () => {
-
     return (
         <Router>
+            <h1>Router check</h1>
       <div>
         <nav>
           <ul>
@@ -47,9 +46,6 @@ const AppLayout = () => {
             </li>
           </ul>
         </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/mi">
             <Dashboard />
@@ -60,15 +56,7 @@ const AppLayout = () => {
         </Switch>
       </div>
     </Router>
-        // <>
-        //     <div>
-        //         <Switch>
-        //             <Route exact path={'/mi'} component={Dashboard}/>
-        //             <Route exact path={'/si'} component={SiDashboard}/>
-        //         </Switch>
-        //     </div>
-        // </>
     );
 };
 
-export default withRouter(AppLayout);
+export default AppLayout;
