@@ -26,6 +26,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
+import {withRouter} from 'react-router-dom';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
@@ -35,13 +36,13 @@ import Paper from '@material-ui/core/Paper';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
-import { mainListItems, globalSettings } from './NavMenuItems';
+import { mainListItems, globalSettings } from '../home/NavMenuItems';
 import clsx from 'clsx';
-import NodeFilter from './NodeFilter';
+import NodeFilter from '../home/NodeFilter';
 import ProxyService from '../pages/ProxyService';
 import logo from '../images/logo.svg';
 
-export default function SiDashboard() {
+const SiDashboard = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -205,3 +206,5 @@ const useStyles = makeStyles((theme) => ({
     },
 
 }));
+
+export default withRouter(SiDashboard);
