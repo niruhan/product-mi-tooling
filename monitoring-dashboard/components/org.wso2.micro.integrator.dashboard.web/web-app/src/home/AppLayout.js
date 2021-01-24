@@ -19,80 +19,56 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
-import {Switch, Route} from 'react-router-dom';
-// import styled from 'styled-components';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 import Dashboard from './Dashboard';
 import SiDashboard from '../si/SiDashboard';
-
-// const Root = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   margin: 0 auto;
-//   width: 100%;
-//   position: relative;
-
-//   @media (min-width: ${p => p.theme.screen.md}) {
-//     width: ${p => p.theme.screen.md};
-//   }
-
-//   @media (min-width: ${p => parseInt(p.theme.screen.lg, 10) + 20 + 'px'}) {
-//     width: ${p => p.theme.screen.lg};
-//   }
-// `;
 
 /**
  * Main layout of the app
  */
 const AppLayout = () => {
-    // const [{auth}, dispatch] = useStore();
-
-    // const windowSize = useWindowSize();
-    // const isDesktop = windowSize.width >= parseInt(theme.screen.md, 10);
-    // const [isSideBarOpen, setIsSidebarOpen] = useState(isDesktop);
-
-    // const sideBarRef = useRef('');
-
-    // useEffect(() => {
-    //     dispatch({type: SET_AUTH_USER, payload: authUser});
-    // }, [dispatch, authUser]);
-
-    // useClickOutside(sideBarRef, () => {
-    //     if (!isDesktop && isSideBarOpen) {
-    //         setIsSidebarOpen(false);
-    //     }
-    // });
-
-    // useEffect(() => {
-    //     setIsSidebarOpen(isDesktop);
-    // }, [isDesktop]);
-
-    // useEffect(() => {
-    //     return () => {
-    //         if (!isDesktop) {
-    //             setIsSidebarOpen(false);
-    //         }
-    //     };
-    // }, [location.pathname, isDesktop]);
-
-    // if (!auth.user) return null;
 
     return (
-        <>
-            <div>
-                <Switch>
-                    <Route exact path={'/mi'} component={Dashboard}/>
-                    <Route exact path={'/si'} component={SiDashboard}/>
-                </Switch>
-            </div>
-        </>
-    );
-};
+        <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/mi">Micro Integrator Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/si">Streaming Integrator Dashboard</Link>
+            </li>
+          </ul>
+        </nav>
 
-AppLayout.propTypes = {
-    location: PropTypes.object.isRequired,
-    authUser: PropTypes.object.isRequired,
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/mi">
+            <Dashboard />
+          </Route>
+          <Route path="/si">
+            <SiDashboard />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+        // <>
+        //     <div>
+        //         <Switch>
+        //             <Route exact path={'/mi'} component={Dashboard}/>
+        //             <Route exact path={'/si'} component={SiDashboard}/>
+        //         </Switch>
+        //     </div>
+        // </>
+    );
 };
 
 export default withRouter(AppLayout);
